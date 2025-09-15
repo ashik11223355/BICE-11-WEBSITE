@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Green Gradient Notice Board</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-1: #0ea5a2;
+      --green-2: #10b981;
+      --green-3: #16a34a;
+      --green-4: #065f46;
+    }
+    html, body { height: 100%; }
+    body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji"; }
+    .glass {
+      background: rgba(255,255,255,0.09);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .scroll-smooth { scroll-behavior: smooth; }
+    .fade-in { animation: fadeIn 220ms ease-out; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: none; }
+    }
+    .badge { padding: 0.25rem 0.55rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
+    .badge-Exam { background: #dcfce7; color: #166534; }
+    .badge-Assignment { background: #dbeafe; color: #1e40af; }
+    .badge-Resource { background: #fef9c3; color: #854d0e; }
+    .badge-Lab\ Report { background: #fae8ff; color: #86198f; }
+    .badge-Lab\ Cover\ Page { background: #fee2e2; color: #991b1b; }
+    .badge-All\ Subjects { background: #e0f2fe; color: #075985; }
+    .star-anim { transition: transform 150ms ease; }
+    .star-anim:active { transform: scale(0.92) rotate(-8deg); }
+  </style>
+</head>
+<body class="min-h-full scroll-smooth bg-gradient-to-br from-emerald-700 via-emerald-600 to-teal-700 text-emerald-50">
+  <div class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
+    <!-- Header -->
+    <header class="mb-8 md:mb-10">
+      <div class="flex flex-col md:flex-row md:items-end gap-4">
+        <div class="flex-1">
+          <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
+            Notice Board
+          </h1>
+          <p class="text-emerald-100 mt-2 md:mt-3">
+            Quick access to Exams, Assignments, Resources, Lab Reports, Lab Cover Pages and All Subjects — all in one place.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="btnAdd" class="inline-flex items-center gap-2 bg-emerald-400 hover:bg-emerald-300 text-emerald-900 font-semibold rounded-lg px-4 py-2 transition">
+            <span class="inline-block -mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11 11V5a1 1 0 1 1 2 0v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 1 1 0-2h6z"/>
+              </svg>
+            </span>
+            New Notice
+          </button>
+          <button id="btnReset" class="inline-flex items-center gap-2 bg-emerald-900/30 hover:bg-emerald-900/40 text-emerald-50 font-semibold rounded-lg px-4 py-2 transition">
+            <span class="inline-block -mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 12a9 9 0 0 1 15.59-6.59l1.7-1.7A1 1 0 0 1 22 4v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-.71-1.71l2.41-2.41A7 7 0 1 0 19 12a1 1 0 1 1 2 0 9 9 0 1 1-18 0z"/>
+              </svg>
+            </span>
+            Reset Demo
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Controls -->
+    <section class="glass rounded-2xl p-4 md:p-6 mb-6 md:mb-8">
+      <div class="flex flex-col lg:flex-row gap-4 lg:items-center">
+        <div class="flex-1">
+          <div id="categoryBar" class="flex flex-wrap gap-2"></div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <div class="relative">
+            <select id="subjectFilter" class="appearance-none bg-emerald-900/30 text-emerald-50 rounded-lg py-2.5 pl-3 pr-10 outline-none border border-emerald-700/40 hover:border-emerald-500/60 transition">
+              <option value="all">All Subjects</option>
+            </select>
+            <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-emerald-200">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 14.5 6.5 9a1 1 0 1 1 1.4-1.4L12 11.2l4.1-3.6A1 1 0 1 1 17.5 9L12 14.5z"/>
+              </svg>
+            </span>
+          </div>
+          <div class="relative">
+            <input id="searchInput" type="text" placeholder="Search notices..." class="w-full sm:w-72 bg-emerald-900/30 text-emerald-50 placeholder-emerald-200/70 rounded-lg py-2.5 pl-10 pr-3 outline-none border border-emerald-700/40 hover:border-emerald-500/60 transition" />
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-200">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10.5 3a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11zm8.85 13.44 2.1 2.1a1 1 0 0 1-1.42 1.42l-2.1-2.1a1 1 0 1 1 1.42-1.42z"/>
+              </svg>
+            </span>
+          </div>
+          <div class="relative">
+            <select id="sortSelect" class="appearance-none bg-emerald-900/30 text-emerald-50 rounded-lg py-2.5 pl-3 pr-10 outline-none border border-emerald-700/40 hover:border-emerald-500/60 transition">
+              <option value="date-desc">Newest first</option>
+              <option value="date-asc">Oldest first</option>
+              <option value="due-asc">Closest due date</option>
+              <option value="due-desc">Farthest due date</option>
+              <option value="title-asc">Title A–Z</option>
+            </select>
+            <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-emerald-200">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 14.5 6.5 9a1 1 0 1 1 1.4-1.4L12 11.2l4.1-3.6A1 1 0 1 1 17.5 9L12 14.5z"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <button id="quickToday" class="px-3 py-1.5 rounded-full text-sm font-semibold bg-emerald-900/30 hover:bg-emerald-900/40 transition">Due Today</button>
+        <button id="quickWeek" class="px-3 py-1.5 rounded-full text-sm font-semibold bg-emerald-900/30 hover:bg-emerald-900/40 transition">Due This Week</button>
+        <button id="quickPinned" class="px-3 py-1.5 rounded-full text-sm font-semibold bg-emerald-900/30 hover:bg-emerald-900/40 transition">Pinned</button>
+        <button id="quickClear" class="px-3 py-1.5 rounded-full text-sm font-semibold bg-emerald-900/30 hover:bg-emerald-900/40 transition">Clear Filters</button>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Board -->
+      <div class="lg:col-span-2 glass rounded-2xl p-4 md:p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 id="listTitle" class="text-xl md:text-2xl font-bold">All Notices</h2>
+          <div class="text-sm text-emerald-100/90">
+            <span id="resultCount">0</span> items
+          </div>
+        </div>
+        <div id="noticeList" class="grid sm:grid-cols-2 gap-4 md:gap-5"></div>
+        <div id="emptyState" class="hidden text-center py-12 text-emerald-100">
+          <div class="mx-auto w-16 h-16 rounded-full bg-emerald-900/30 grid place-items-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h14zm1 12h-3.586l-2 2H9.586l-2-2H4v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3zm0-2V6a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v7h3.586l2 2h4.828l2-2H20z"/>
+            </svg>
+          </div>
+          No notices match your filters. Try clearing filters or adding a new notice.
+        </div>
+      </div>
+
+      <!-- Sidebar: All Options -->
+      <aside class="glass rounded-2xl p-4 md:p-6">
+        <h3 class="text-lg font-bold mb-3">All Options</h3>
+        <div class="space-y-3">
+          <button id="optExport" class="w-full flex items-center justify-between bg-emerald-900/30 hover:bg-emerald-900/40 rounded-xl px-4 py-3 transition">
+            <span class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-200" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3a1 1 0 0 1 1 1v9.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-4.007 4.007a1.25 1.25 0 0 1-1.768 0L6.925 12.707A1 1 0 0 1 8.34 11.293L10.999 13.95V4a1 1 0 0 1 1-1z"/>
+                <path d="M4 15a1 1 0 0 1 1 1v2h14v-2a1 1 0 1 1 2 0v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-3a1 1 0 0 1 2 0v2h2v-2a1 1 0 0 1 1-1z"/>
+              </svg>
+              Export JSON
+            </span>
+            <span class="text-xs text-emerald-200/80">Download</span>
+          </button>
+          <button id="optTemplates" class="w-full flex items-center justify-between bg-emerald-900/30 hover:bg-emerald-900/40 rounded-xl px-4 py-3 transition">
+            <span class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-200" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M5 3h10a2 2 0 0 1 2 2v3h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 0a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h4l0-3a2 2 0 0 1 2-2h8V10h-2v3H9a2 2 0 0 0-2 2v2H7V5H5z"/>
+              </svg>
+              Download Lab Cover
+            </span>
+            <span class="text-xs text-emerald-200/80">Sample</span>
+          </button>
+          <button id="optCalendar" class="w-full flex items-center justify-between bg-emerald-900/30 hover:bg-emerald-900/40 rounded-xl px-4 py-3 transition">
+            <span class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-200" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h1V3a1 1 0 0 1 1-1zM3 9v9a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9H3z"/>
+              </svg>
+              Show Upcoming
+            </span>
+            <span class="text-xs text-emerald-200/80">7 days</span>
+          </button>
+        </div>
+
+        <div class="mt-6">
+          <h4 class="font-semibold mb-2">Subjects</h4>
+          <div id="subjectTags" class="flex flex-wrap gap-2"></div>
+        </div>
+      </aside>
+    </section>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div id="modal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative mx-auto max-w-xl mt-16 md:mt-24 px-4 fade-in">
+      <div class="glass rounded-2xl p-5 md:p-6">
+        <div class="flex items-start justify-between mb-3">
+          <h3 id="modalTitle" class="text-xl font-bold">New Notice</h3>
+          <button id="modalClose" class="p-2 rounded-lg hover:bg-emerald-900/30">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6.225 4.811a1 1 0 0 1 1.414 0L12 9.172l4.361-4.361a1 1 0 1 1 1.414 1.414L13.414 10.586l4.361 4.361a1 1 0 1 1-1.414 1.414L12 12l-4.361 4.361a1 1 0 1 1-1.414-1.414L10.586 10.586 6.225 6.225a1 1 0 0 1 0-1.414z"/>
+            </svg>
+          </button>
+        </div>
+        <form id="noticeForm" class="space-y-3">
+          <div class="grid md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm mb-1">Title</label>
+              <input required id="fTitle" type="text" class="w-full bg-emerald-900/30 text-emerald-50 rounded-lg py-2.5 px-3 outline-none border border-emerald-700/40 focus:border-emerald-400 transition" placeholder="e.g., Midterm Exam Schedule"/>
+            </div>
+            <div>
+              <label class="block text-sm mb-1">Category</label>
+              <select id="fCategory" class="w-full bg-emerald-900/30 text-emerald-50 rounded-lg py-2.5 px-3 outline-none border border-emerald-700/40 focus:border-emerald-400 transition">
+                <option>Exam</option>
+                <option>Assignment</option>
+                <option>Resource</option>
+                <option>Lab Report</option>
+                <option>Lab Cover Page</option>
+                <option>All Subjects</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm mb-1">Subject</label>
+              <input id="fSubject" type="text" class="w-full bg-emerald-900/30 text-emerald-50 rounded-lg py-2.5 px-3 outline-none border border-emerald-700/40 focus:border-emerald-400 transition" placeholder="e.g., Physics"/>
+            </div>
+            <div>
+              <label class="block text-sm mb-1">Due Date (optional)</label>
+              <input id="fDue" type="date" class="w-full bg-emerald-900/30 text-emerald-50 rounded-lg py-2.5 px-3 outline-none border border-emerald-700/40 focus:border-emerald-400 transition"/>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm mb-1">Details</label>
+            <textarea id="fDetails" rows="3" class="w-full bg-emerald-900/30 text-emerald-50 rounded-lg py-2.5 px-3 outline-none border border-emerald-700/40 focus:border-emerald-400 transition" placeholder="Add notes, requirements, links..."></textarea>
+          </div>
+          <div class="flex items-center justify-between pt-1">
+            <label class="inline-flex items-center gap-2 text-sm">
+              <input id="fPinned" type="checkbox" class="w-4 h-4 accent-emerald-400">
+              Pin this notice
+            </label>
+            <div class="flex gap-2">
+              <button type="button" id="btnDelete" class="hidden px-4 py-2 rounded-lg bg-red-500/80 hover:bg-red-500 text-white font-semibold">Delete</button>
+              <button type="button" id="btnCancel" class="px-4 py-2 rounded-lg bg-emerald-900/30 hover:bg-emerald-900/40 text-emerald-50 font-semibold">Cancel</button>
+              <button type="submit" class="px-4 py-2 rounded-lg bg-emerald-400 hover:bg-emerald-300 text-emerald-900 font-semibold">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Demo data (small set)
+    const initialNotices = [
+      { id: 'n1', title: 'Midterm Exam Schedule', category: 'Exam', subject: 'Mathematics', createdAt: isoDaysAgo(6), due: addDays(new Date(), 3), details: 'Room A1, bring calculator', pinned: true },
+      { id: 'n2', title: 'Assignment 2: Vectors', category: 'Assignment', subject: 'Physics', createdAt: isoDaysAgo(3), due: addDays(new Date(), 5), details: 'Submit PDF via portal', pinned: false },
+      { id: 'n3', title: 'Lab Report Format', category: 'Lab Report', subject: 'Chemistry', createdAt: isoDaysAgo(10), due: null, details: 'Follow the rubric attached', pinned: false },
+      { id: 'n4', title: 'Cover Page Template', category: 'Lab Cover Page', subject: 'All Subjects', createdAt: isoDaysAgo(8), due: null, details: 'Standardized lab cover page template', pinned: false },
+      { id: 'n5', title: 'Reference: Past Papers', category: 'Resource', subject: 'All Subjects', createdAt: isoDaysAgo(1), due: null, details: 'Drive link with previous exams', pinned: true },
+      { id: 'n6', title: 'Assignment: Essay Draft', category: 'Assignment', subject: 'English', createdAt: isoDaysAgo(2), due: addDays(new Date(), 1), details: '1000 words, MLA style', pinned: false },
+    ];
+
+    const categories = ['All', 'Exam', 'Assignment', 'Resource', 'Lab Report', 'Lab Cover Page', 'All Subjects'];
+
+    // State
+    let notices = [];
+    let filter = { category: 'All', subject: 'all', search: '', sort: 'date-desc', quick: null, pinnedOnly: false };
+    let editingId = null;
+
+    // Elements
+    const categoryBar = document.getElementById('categoryBar');
+    const subjectFilter = document.getElementById('subjectFilter');
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const noticeList = document.getElementById('noticeList');
+    const listTitle = document.getElementById('listTitle');
+    const resultCount = document.getElementById('resultCount');
+    const emptyState = document.getElementById('emptyState');
+
+    const btnAdd = document.getElementById('btnAdd');
+    const btnReset = document.getElementById('btnReset');
+    const quickToday = document.getElementById('quickToday');
+    const quickWeek = document.getElementById('quickWeek');
+    const quickPinned = document.getElementById('quickPinned');
+    const quickClear = document.getElementById('quickClear');
+
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalClose = document.getElementById('modalClose');
+    const noticeForm = document.getElementById('noticeForm');
+    const btnCancel = document.getElementById('btnCancel');
+    const btnDelete = document.getElementById('btnDelete');
+    const fTitle = document.getElementById('fTitle');
+    const fCategory = document.getElementById('fCategory');
+    const fSubject = document.getElementById('fSubject');
+    const fDue = document.getElementById('fDue');
+    const fDetails = document.getElementById('fDetails');
+    const fPinned = document.getElementById('fPinned');
+
+    const subjectTags = document.getElementById('subjectTags');
+    const optExport = document.getElementById('optExport');
+    const optTemplates = document.getElementById('optTemplates');
+    const optCalendar = document.getElementById('optCalendar');
+
+    // Utils
+    function addDays(date, n) { const d = new Date(date); d.setDate(d.getDate() + n); return d; }
+    function isoDaysAgo(n) { const d = new Date(); d.setDate(d.getDate() - n); return d.toISOString(); }
+    function fmtDate(d) { if (!d) return '—'; const x = new Date(d); if (Number.isNaN(x)) return '—'; return x.toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric' }); }
+    function daysBetween(a, b) { const ms = 24*3600*1000; return Math.floor((new Date(a).setHours(0,0,0,0) - new Date(b).setHours(0,0,0,0))/ms); }
+
+    // Local storage
+    const LS_KEY = 'noticeBoardData_v1';
+    function loadData() {
+      try {
+        const raw = localStorage.getItem(LS_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) return parsed;
+        }
+      } catch {}
+      return initialNotices;
+    }
+    function saveData() {
+      localStorage.setItem(LS_KEY, JSON.stringify(notices));
+    }
+
+    // Init
+    function init() {
+      notices = loadData();
+      renderCategoryChips();
+      refreshSubjects();
+      bindEvents();
+      applyFilters();
+    }
+
+    // Category chips
+    function renderCategoryChips() {
+      categoryBar.innerHTML = '';
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'px-3 py-1.5 rounded-full text-sm font-semibold transition border ' +
+          (filter.category === cat
+            ? 'bg-emerald-400 text-emerald-900 border-emerald-400'
+            : 'bg-emerald-900/30 text-emerald-50 border-emerald-700/40 hover:bg-emerald-900/40');
+        btn.textContent = cat;
+        btn.setAttribute('data-cat', cat);
+        btn.addEventListener('click', () => {
+          filter.category = cat;
+          filter.quick = null;
+          filter.pinnedOnly = false;
+          applyFilters();
+          renderCategoryChips();
+        });
+        c
