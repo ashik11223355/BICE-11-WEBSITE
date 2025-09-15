@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ICT 11 • Study Material Notices</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind config for a polished green palette and smooth transitions
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b'
+            }
+          },
+          boxShadow: {
+            glow: '0 10px 30px rgba(16,185,129,.25)'
+          },
+          keyframes: {
+            float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+            fadeUp: { '0%': { opacity: 0, transform: 'translateY(20px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+            pulseSoft: { '0%, 100%': { opacity: 1 }, '50%': { opacity: .7 } },
+            marquee: { '0%': { transform: 'translateX(100%)' }, '100%': { transform: 'translateX(-100%)' } }
+          },
+          animation: {
+            float: 'float 6s ease-in-out infinite',
+            fadeUp: 'fadeUp .7s ease-out both',
+            pulseSoft: 'pulseSoft 3s ease-in-out infinite',
+            marquee: 'marquee 16s linear infinite'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Extra polish */
+    .glass {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    .grid-auto-fit {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-emerald-950 via-brand-900 to-emerald-800 text-brand-50 antialiased selection:bg-emerald-300 selection:text-brand-900">
+  <!-- Decorative floating shapes -->
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden">
+    <div class="absolute -top-16 -right-10 w-64 h-64 rounded-full bg-emerald-500/20 blur-3xl animate-float"></div>
+    <div class="absolute -bottom-24 -left-10 w-72 h-72 rounded-full bg-teal-400/20 blur-3xl animate-float" style="animation-delay: 1.2s;"></div>
+  </div>
+
+  <header class="relative z-10">
+    <!-- Ticker / Notice bar -->
+    <div class="glass w-full py-2 border-b border-white/10">
+      <div class="relative mx-auto max-w-6xl overflow-hidden">
+        <div class="flex items-center gap-2 px-4">
+          <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-100 ring-1 ring-emerald-300/30">
+            <span class="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
+            Live
+          </span>
+          <div class="relative flex-1">
+            <div class="whitespace-nowrap animate-marquee text-emerald-100/90">
+              ICT 11 Updates: Midterm review set is out now • Lab schedule updated • New practice quiz added • Project brief v2 released • Check tonight’s Q&A session at 7 PM
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="mx-auto max-w-6xl px-6 pt-10 pb-6">
+      <div class="flex flex-col items-center text-center gap-6">
+        <div class="inline-flex items-center gap-2 rounded-full bg-emerald-600/40 px-4 py-1.5 text-sm font-medium text-emerald-50 ring-1 ring-emerald-300/30 animate-fadeUp">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          ICT 11 • Study Material Notices
+        </div>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-emerald-100 drop-shadow animate-fadeUp" style="animation-delay:.05s">
+          Stay on top of every update
+        </h1>
+        <p class="max-w-2xl text-emerald-100/80 animate-fadeUp" style="animation-delay:.1s">
+          A clean, green notice board with smooth animations. Browse announcements, open details, and mark items as read.
+        </p>
+
+        <!-- Filters -->
+        <div class="flex flex-wrap items-center justify-center gap-2 animate-fadeUp" style="animation-delay:.15s">
+          <button data-filter="all" class="filter-btn active inline-flex items-center gap-2 rounded-full bg-emerald-400/20 text-emerald-50 hover:bg-emerald-400/30 transition px-4 py-2 ring-1 ring-emerald-300/30">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4h14v2H3V4zm0 5h14v2H3V9zm0 5h14v2H3v-2z"/></svg>
+            All
+          </button>
+          <button data-filter="exam" class="filter-btn inline-flex items-center gap-2 rounded-full bg-emerald-400/10 text-emerald-50 hover:bg-emerald-400/30 transition px-4 py-2 ring-1 ring-emerald-300/30">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 20h10M7 4h10v12H7z"/></svg>
+            Exams
+          </button>
+          <button data-filter="assignment" class="filter-btn inline-flex items-center gap-2 rounded-full bg-emerald-400/10 text-emerald-50 hover:bg-emerald-400/30 transition px-4 py-2 ring-1 ring-emerald-300/30">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6M9 16h6M7 4h10v4H7z"/></svg>
+            Assignments
+          </button>
+          <button data-filter="resource" class="filter-btn inline-flex items-center gap-2 rounded-full bg-emerald-400/10 text-emerald-50 hover:bg-emerald-400/30 transition px-4 py-2 ring-1 ring-emerald-300/30">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"/></svg>
+            Resources
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 mx-auto max-w-6xl px-6 pb-16">
+    <!-- Cards -->
+    <section id="cards" class="grid-auto-fit">
+      <!-- Card Template Examples (small sample set) -->
+      <article class="notice-card glass rounded-2xl p-5 text-emerald-50 shadow-glow transition hover:-translate-y-1 hover:shadow-2xl" data-id="n1" data-type="exam" style="animation: fadeUp .6s ease-out both;">
+        <div class="flex items-start justify-between gap-4">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold ring-1 ring-emerald-300/30">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"/></svg>
+              Exam
+            </span>
+          </div>
+          <span class="text-xs text-emerald-100/70">Posted: Sep 10</span>
+        </div>
+        <h3 class="mt-3 text-lg font-bold">Midterm Review Schedule</h3>
+        <p class="mt-2 text-emerald-100/80">Time slots and topics for the ICT 11 midterm review week. Seats are first-come, first-served.</p>
+        <div class="mt-4 flex items-center gap-2">
+          <button class="open-btn inline-flex items-center gap-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 transition text-brand-900 font-semibold px-3.5 py-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V8.414A2 2 0 0016.414 7L12 2.586A2 2 0 0010.586 2H5z" clip-rule="evenodd"/></svg>
+            Open notice
+          </button>
+          <button class="read-btn inline-flex items-center gap-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 transition text-emerald-100 px-3.5 py-2 ring-1 ring-emerald-300/30">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Mark as read
+          </button>
+        </div>
+      </article>
+
+      <article class="notice-card glass rounded-2xl p-5 text-emerald-50 shadow-glow transition hover:-translate-y-1 hover:shadow-2xl" data-id="n2" data-type="assignment" style="animation: fadeUp .6s ease-out both; animation-delay:.05s">
+        <div class="flex items-start justify-between gap-4">
+          <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold ring-1 ring-emerald-300/30">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6M9 16h6M7 4h10v4H7z"/></svg>
+            Assignment
+          </span>
+          <span class="text-xs text-emerald-100/70">Posted: Sep 12</span>
+        </div>
+        <h3 class="mt-3 text-lg font-bold">HTML Layout Mini Project</h3>
+        <p class="mt-2 text-emerald-100/80">Create a responsive single-page layout with a header, a content section, and a footer.</p>
+        <div class="mt-4 flex items-center gap-2">
+          <button class="open-btn inline-flex items-center gap-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 transition text-brand-900 font-semibold px-3.5 py-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V8.414A2 2 0 0016.414 7L12 2.586A2 2 0 0010.586 2H5z" clip-rule="evenodd"/></svg>
+            Open notice
+          </button>
+          <button class="read-btn inline-flex items-center gap-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 transition text-emerald-100 px-3.5 py-2 ring-1 ring-emerald-300/30">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Mark as read
+          </button>
+        </div>
+      </article>
+
+      <article class="notice-card glass rounded-2xl p-5 text-emerald-50 shadow-glow transition hover:-translate-y-1 hover:shadow-2xl" data-id="n3" data-type="resource" style="animation: fadeUp .6s ease-out both; animation-delay:.1s">
+        <div class="flex items-start justify-between gap-4">
+          <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold ring-1 ring-emerald-300/30">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"/></svg>
+            Resource
+          </span>
+          <span class="text-xs text-emerald-100/70">Posted: Sep 14</span>
+        </div>
+        <h3 class="mt-3 text-lg font-bold">Networking Basics – Quick Guide</h3>
+        <p class="mt-2 text-emerald-100/80">A concise PDF handout on IP addresses, DNS, and routing. Great for fast revision.</p>
+        <div class="mt-4 flex items-center gap-2">
+          <button class="open-btn inline-flex items-center gap-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 transition text-brand-900 font-semibold px-3.5 py-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V8.414A2 2 0 0016.414 7L12 2.586A2 2 0 0010.586 2H5z" clip-rule="evenodd"/></svg>
+            Open notice
+          </button>
+          <button class="read-btn inline-flex items-center gap-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 transition text-emerald-100 px-3.5 py-2 ring-1 ring-emerald-300/30">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Mark as read
+          </button>
+        </div>
+      </article>
+
+      <article class="notice-card glass rounded-2xl p-5 text-emerald-50 shadow-glow transition hover:-translate-y-1 hover:shadow-2xl" data-id="n4" data-type="exam" style="animation: fadeUp .6s ease-out both; animation-delay:.15s">
+        <div class="flex items-start justify-between gap-4">
+          <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold ring-1 ring-emerald-300/30">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"/></svg>
+            Exam
+          </span>
+          <span class="text-xs text-emerald-100/70">Posted: Sep 15</span>
+        </div>
+        <h3 class="mt-3 text-lg font-bold">Practice Quiz – Web Basics</h3>
+        <p class="mt-2 text-emerald-100/80">Short quiz focusing on tags, attributes, and semantics. Great prep for upcoming checks.</p>
+        <div class="mt-4 flex items-center gap-2">
+          <button class="open-btn inline-flex items-center gap-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 transition text-brand-900 font-semibold px-3.5 py-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V8.414A2 2 0 0016.414 7L12 2.586A2 2 0 0010.586 2H5z" clip-rule="evenodd"/></svg>
+            Open notice
+          </button>
+          <button class="read-btn inline-flex items-center gap-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 transition text-emerald-100 px-3.5 py-2 ring-1 ring-emerald-300/30">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Mark as read
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <!-- Empty state -->
+    <div id="empty" class="hidden mt-10 text-center">
+      <div class="inline-flex items-center gap-3 rounded-xl bg-emerald-500/10 px-4 py-3 ring-1 ring-emerald-300/30">
+        <svg class="w-5 h-5 text-emerald-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="text-emerald-100/80">No notices match this filter.</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div class="absolute inset-0 bg-brand-900/70 backdrop-blur-sm"></div>
+    <div class="relative w-full max-w-2xl glass rounded-2xl p-6 text-emerald-50 ring-1 ring-white/15 shadow-2xl animate-fadeUp">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <div id="modalTag" class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold ring-1 ring-emerald-300/30">Notice</div>
+          <h3 id="modalTitle" class="mt-3 text-2xl font-extrabold">Notice Title</h3>
+        </div>
+        <button id="modalClose" class="rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 transition p-2 text-emerald-100" aria-label="Close">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <p id="modalDate" class="mt-1 text-sm text-emerald-100/70">Posted: —</p>
+      <p id="modalBody" class="mt-4 text-emerald-100/90 leading-relaxed">
+        —
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-2">
+        <!-- Demo: since no real files, we show a friendly sample action -->
+        <button id="modalAction" class="inline-flex items-center gap-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 transition text-brand-900 font-semibold px-4 py-2">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V8.414A2 2 0 0016.414 7L12 2.586A2 2 0 0010.586 2H5z" clip-rule="evenodd"/></svg>
+          Open sample
+        </button>
+        <span class="text-xs text-emerald-100/70">This is a demo action (no real files linked).</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 hidden">
+    <div class="glass rounded-xl px-4 py-3 text-emerald-50 ring-1 ring-white/20 shadow-glow flex items-center gap-2">
+      <svg class="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      <span id="toastText" class="text-sm">Marked as read</span>
+    </div>
+  </div>
+
+  <footer class="relative z-10 border-t border-white/10">
+    <div class="mx-auto max-w-6xl px-6 py-8 text-emerald-100/70 text-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-emerald-300 animate-pulseSoft" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg>
+        ICT 11 Notice Board
+      </div>
+      <div class="text-center sm:text-right">
+        Tip: Use the filters to quickly find what you need.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Minimal data model for the sample notices
+    const notices = {
+      n1: {
+        id: 'n1',
+        type: 'exam',
+        tag: 'Exam',
+        date: 'Sep 10',
+        title: 'Midterm Review Schedule',
+        body: 'The midterm review runs from Sep 20–24. Topics include HTML structure, basic styling principles, and introductory networking. Please arrive 10 minutes early. Bring your notes and questions for the open Q&A segment.'
+      },
+      n2: {
+        id: 'n2',
+        type: 'assignment',
+        tag: 'Assignment',
+        date: 'Sep 12',
+        title: 'HTML Layout Mini Project',
+        body: 'Build a single-page layout with a header, content, and footer. Keep it responsive and neatly spaced. Submission deadline: Sep 25 at 11:59 PM. You may work in pairs.'
+      },
+      n3: {
+        id: 'n3',
+        type: 'resource',
+        tag: 'Resource',
+        date: 'Sep 14',
+        title: 'Networking Basics – Quick Guide',
+        body: 'A 3-page handout covering IP, DNS, and routing fundamentals. Recommended reading before the quiz. Save it for quick revision during study week.'
+      },
+      n4: {
+        id: 'n4',
+        type: 'exam',
+        tag: 'Exam',
+        date: 'Sep 15',
+        title: 'Practice Quiz – Web Basics',
+        body: 'A short practice quiz on tags, attributes, and semantics. Try it before the weekend. Aim for at least 80% and note areas to revisit.'
+      }
+    };
+
+    // Elements
+    const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
+    const cards = Array.from(document.querySelectorAll('.notice-card'));
+    const emptyState = document.getElementById('empty');
+    const modal = document.getElementById('modal');
+    const modalClose = document.getElementById('modalClose');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    const modalDate = document.getElementById('modalDate');
+    const modalTag = document.getElementById('modalTag');
+    c
