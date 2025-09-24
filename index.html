@@ -1,311 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BICE-25</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    // Tailwind config for a polished green palette and smooth transitions
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#ecfdf5',
-              100: '#d1fae5',
-              200: '#a7f3d0',
-              300: '#6ee7b7',
-              400: '#34d399',
-              500: '#10b981',
-              600: '#059669',
-              700: '#047857',
-              800: '#065f46',
-              900: '#064e3b'
-            }
-          },
-          boxShadow: {
-            glow: '0 10px 30px rgba(16,185,129,.25)'
-          },
-          keyframes: {
-            float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
-            fadeUp: { '0%': { opacity: 0, transform: 'translateY(20px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
-            pulseSoft: { '0%, 100%': { opacity: 1 }, '50%': { opacity: .7 } },
-            marquee: { '0%': { transform: 'translateX(100%)' }, '100%': { transform: 'translateX(-100%)' } }
-          },
-          animation: {
-            float: 'float 6s ease-in-out infinite',
-            fadeUp: 'fadeUp .7s ease-out both',
-            pulseSoft: 'pulseSoft 3s ease-in-out infinite',
-            marquee: 'marquee 16s linear infinite'
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    /* Extra polish */
-    .glass {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.06));
-      border: 1px solid rgba(255,255,255,.15);
-    }
-    .grid-auto-fit {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); }
+        .card-shadow { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
+    </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-emerald-950 via-brand-900 to-emerald-800 text-brand-50 antialiased selection:bg-emerald-300 selection:text-brand-900">
-  <!-- Decorative floating shapes -->
-  <div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden">
-    <div class="absolute -top-16 -right-10 w-64 h-64 rounded-full bg-emerald-500/20 blur-3xl animate-float"></div>
-    <div class="absolute -bottom-24 -left-10 w-72 h-72 rounded-full bg-teal-400/20 blur-3xl animate-float" style="animation-delay: 1.2s;"></div>
-  </div>
-
-  <header class="relative z-10">
-    <!-- Ticker / Notice bar -->
-    <div class="glass w-full py-2 border-b border-white/10">
-      <div class="relative mx-auto max-w-6xl overflow-hidden">
-        <div class="flex items-center gap-2 px-4">
-          <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-100 ring-1 ring-emerald-300/30">
-            <span class="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
-            Live
-          </span>
-          <div class="relative flex-1">
-            <div class="whitespace-nowrap animate-marquee text-emerald-100/90">
-              BICE-25 Updates: Statictis Exam on 17Sept. Math HW.Structurer programming Ct next Week
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <span class="text-2xl">🩸</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">LifeShare Blood Center</h1>
+                        <p class="text-red-100 text-sm">Saving lives, one donation at a time</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <span class="text-red-100">📞 1-800-DONATE</span>
+                    <span class="text-red-100">🕒 Open 24/7</span>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Main Form -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl card-shadow p-8">
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2">Donor Information Form</h2>
+                        <p class="text-gray-600">Please fill out your information to schedule a blood donation appointment.</p>
+                    </div>
+
+                    <form id="donorForm" class="space-y-6">
+                        <!-- Personal Information -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                                <span class="mr-2">👤</span> Personal Information
+                            </h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                                    <input type="text" id="firstName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                                    <input type="text" id="lastName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth *</label>
+                                    <input type="date" id="dob" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Blood Type</label>
+                                    <select id="bloodType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                        <option value="">Select if known</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                                <span class="mr-2">📞</span> Contact Information
+                            </h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                                    <input type="tel" id="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                                    <input type="email" id="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+                                    <input type="text" id="address" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">City *</label>
+                                    <input type="text" id="city" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">ZIP Code *</label>
+                                    <input type="text" id="zip" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Health Information -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                                <span class="mr-2">🏥</span> Health Information
+                            </h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Weight (lbs) *</label>
+                                    <input type="number" id="weight" required min="110" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                    <p class="text-sm text-gray-500 mt-1">Minimum weight requirement: 110 lbs</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Last Donation Date</label>
+                                    <input type="date" id="lastDonation" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Any current medications or health conditions?</label>
+                                    <textarea id="healthNotes" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="Please list any medications or health conditions..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Preferred Appointment -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                                <span class="mr-2">📅</span> Preferred Appointment
+                            </h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Date</label>
+                                    <input type="date" id="preferredDate" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Time</label>
+                                    <select id="preferredTime" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                        <option value="">Select time</option>
+                                        <option value="morning">Morning (8AM - 12PM)</option>
+                                        <option value="afternoon">Afternoon (12PM - 5PM)</option>
+                                        <option value="evening">Evening (5PM - 8PM)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Consent -->
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                            <div class="flex items-start space-x-3">
+                                <input type="checkbox" id="consent" required class="mt-1 w-5 h-5 text-red-600 border-gray-300 rounded focus:ring-red-500">
+                                <label for="consent" class="text-sm text-gray-700">
+                                    I consent to donate blood and understand that I will undergo a brief health screening. I confirm that all information provided is accurate to the best of my knowledge. *
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full gradient-bg text-white py-4 px-6 rounded-lg font-semibold text-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+                            Submit Donor Information
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Sidebar Information -->
+            <div class="space-y-6">
+                <!-- Donation Process -->
+                <div class="bg-white rounded-xl card-shadow p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="mr-2">ℹ️</span> Donation Process
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <span class="bg-red-100 text-red-600 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">1</span>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Registration</h4>
+                                <p class="text-sm text-gray-600">Complete this form and bring a valid ID</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="bg-red-100 text-red-600 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">2</span>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Health Screening</h4>
+                                <p class="text-sm text-gray-600">Quick health check and questionnaire</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="bg-red-100 text-red-600 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">3</span>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Donation</h4>
+                                <p class="text-sm text-gray-600">10-15 minutes of actual donation time</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="bg-red-100 text-red-600 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">4</span>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Recovery</h4>
+                                <p class="text-sm text-gray-600">Rest and refreshments for 10-15 minutes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Eligibility Requirements -->
+                <div class="bg-white rounded-xl card-shadow p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="mr-2">✅</span> Eligibility
+                    </h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-center space-x-2">
+                            <span class="text-green-500">✓</span>
+                            <span>Age 17+ (16 with parental consent)</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-green-500">✓</span>
+                            <span>Weight at least 110 lbs</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-green-500">✓</span>
+                            <span>Good general health</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-green-500">✓</span>
+                            <span>8 weeks since last whole blood donation</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Impact Stats -->
+                <div class="bg-gradient-to-br from-red-500 to-red-600 text-white rounded-xl p-6">
+                    <h3 class="text-xl font-bold mb-4">Your Impact</h3>
+                    <div class="space-y-3">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">3</div>
+                            <div class="text-sm text-red-100">Lives saved per donation</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">56</div>
+                            <div class="text-sm text-red-100">Days between donations</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">1</div>
+                            <div class="text-sm text-red-100">Pint donated each time</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Hero -->
-    <div class="mx-auto max-w-6xl px-6 pt-10 pb-6">
-      <div class="flex flex-col items-center text-center gap-6">
-        <div class="inline-flex items-center gap-2 rounded-full bg-emerald-600/40 px-4 py-1.5 text-sm font-medium text-emerald-50 ring-1 ring-emerald-300/30 animate-fadeUp">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          BICE-25 • Study Material Notices
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md mx-4 text-center">
+            <div class="text-6xl mb-4">🎉</div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Thank You!</h3>
+            <p class="text-gray-600 mb-6">Your donor information has been submitted successfully. We'll contact you within 24 hours to schedule your appointment.</p>
+            <button onclick="closeModal()" class="gradient-bg text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200">
+                Close
+            </button>
         </div>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-emerald-100 drop-shadow animate-fadeUp" style="animation-delay:.05s">
-          Stay on top of every update
-        </h1>
-        <p class="max-w-2xl text-emerald-100/80 animate-fadeUp" style="animation-delay:.1s">
-          A best website for study material 
-        </p>
-
-        <!-- Filters -->
-        <div class="flex flex-wrap items-center justify-center gap-2 animate-fadeUp" style="animation-delay:.15s">
-          <button data-filter="all" class="filter-btn active inline-flex items-center gap-2 rounded-full bg-emerald-400/20 text-emerald-50 hover:bg-emerald-400/30 transition px-4 py-2 ring-1 ring-emerald-300/30">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4h14v2H3V4zm0 5h14v2H3V9zm0 5h14v2H3v-2z"/></svg>
-            All
-          </button>
-          <button data-filter="exam" class="filter-btn inline-flex items-center gap-2 rounded-full bg-emerald-400/10 text-emerald-50 hover:bg-emerald-400/30 transition px-4 py-2 ring-1 ring-emerald-300/30">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 20h10M7 4h10v12H7z"/></svg>
-            Exams
-          </button>
-          <button data-filter="assignment" class="filter-btn inline-flex items-center gap-2 rounded-full bg-emerald-400/10 text-emerald-50 hover:bg-emerald-400/30 transition px-4 py-2 ring-1 ring-emerald-300/30">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6M9 16h6M7 4h10v4H7z"/></svg>
-            Assignments
-          </button>
-          <button data-filter="resource" class="filter-btn inline-flex items-center gap-2 rounded-full bg-emerald-400/10 text-emerald-50 hover:bg-emerald-400/30 transition px-4 py-2 ring-1 ring-emerald-300/30">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"/></svg>
-            Resources
-          </button>
-        </div>
-      </div>
     </div>
-  </header>
 
-  <main class="relative z-10 mx-auto max-w-6xl px-6 pb-16">
-    <!-- Cards -->
-    <section id="cards" class="grid-auto-fit">
-      <!-- Card Template Examples (small sample set) -->
-      <article class="notice-card glass rounded-2xl p-5 text-emerald-50 shadow-glow transition hover:-translate-y-1 hover:shadow-2xl" data-id="n1" data-type="exam" style="animation: fadeUp .6s ease-out both;">
-        <div class="flex items-start justify-between gap-4">
-          <div class="flex items-center gap-2">
-            <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold ring-1 ring-emerald-300/30">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"/></svg>
-              Exam
-            </span>
-          </div>
-          <span class="text-xs text-emerald-100/70">Posted: Sep 10</span>
-        </div>
-        <h3 class="mt-3 text-lg font-bold">Midterm Review Schedule</h3>
-        <p class="mt-2 text-emerald-100/80">All notice And Update Are Shows Here</p>
-        <div class="mt-4 flex items-center gap-2">
-  <a href="notice1.html" class="open-btn ...">Open notice</a>
-  <button class="read-btn ...">Mark as read</button>
-</div>
-      </article>
+    <script>
+        // Set minimum date to today for appointment scheduling
+        document.getElementById('preferredDate').min = new Date().toISOString().split('T')[0];
 
-      <article class="notice-card glass rounded-2xl p-5 text-emerald-50 shadow-glow transition hover:-translate-y-1 hover:shadow-2xl" data-id="n2" data-type="assignment" style="animation: fadeUp .6s ease-out both; animation-delay:.05s">
-        <div class="flex items-start justify-between gap-4">
-          <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold ring-1 ring-emerald-300/30">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6M9 16h6M7 4h10v4H7z"/></svg>
-            Assignment
-          </span>
-          <span class="text-xs text-emerald-100/70">Posted: Sep 12</span>
-        </div>
-        <h3 class="mt-3 text-lg font-bold"> Mini Project FOR BICE 25</h3>
-        <p class="mt-2 text-emerald-100/80">Stay focus on study</p>
-        <div class="mt-4 flex items-center gap-2">
-          <button class="open-btn inline-flex items-center gap-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 transition text-brand-900 font-semibold px-3.5 py-2">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V8.414A2 2 0 0016.414 7L12 2.586A2 2 0 0010.586 2H5z" clip-rule="evenodd"/></svg>
-            Open notice
-          </button>
-          <button class="read-btn inline-flex items-center gap-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 transition text-emerald-100 px-3.5 py-2 ring-1 ring-emerald-300/30">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            Mark as read
-          </button>
-        </div>
-      </article>
+        // Form submission handler
+        document.getElementById('donorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                dob: document.getElementById('dob').value,
+                bloodType: document.getElementById('bloodType').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                zip: document.getElementById('zip').value,
+                weight: document.getElementById('weight').value,
+                lastDonation: document.getElementById('lastDonation').value,
+                healthNotes: document.getElementById('healthNotes').value,
+                preferredDate: document.getElementById('preferredDate').value,
+                preferredTime: document.getElementById('preferredTime').value,
+                consent: document.getElementById('consent').checked
+            };
 
-      <article class="notice-card glass rounded-2xl p-5 text-emerald-50 shadow-glow transition hover:-translate-y-1 hover:shadow-2xl" data-id="n3" data-type="resource" style="animation: fadeUp .6s ease-out both; animation-delay:.1s">
-        <div class="flex items-start justify-between gap-4">
-          <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold ring-1 ring-emerald-300/30">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"/></svg>
-            Resource
-          </span>
-          <span class="text-xs text-emerald-100/70">Posted: Sep 14</span>
-        </div>
-        <h3 class="mt-3 text-lg font-bold"> Assaingnment </h3>
-        <p class="mt-2 text-emerald-100/80">All assaignment are update here.</p>
-        <<div class="mt-4 flex items-center gap-2">
-  <a href="link.html" class="open-btn ...">Open notice</a>
-  <button class="read-btn ...">Mark as read</button>
-</div>
-      </article>
+            // Validate age (must be 17+)
+            const birthDate = new Date(formData.dob);
+            const today = new Date();
+            const age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (age < 17 || (age === 17 && monthDiff < 0)) {
+                alert('You must be at least 17 years old to donate blood.');
+                return;
+            }
 
-      <article class="notice-card glass rounded-2xl p-5 text-emerald-50 shadow-glow transition hover:-translate-y-1 hover:shadow-2xl" data-id="n4" data-type="exam" style="animation: fadeUp .6s ease-out both; animation-delay:.15s">
-        <div class="flex items-start justify-between gap-4">
-          <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold ring-1 ring-emerald-300/30">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"/></svg>
-            Exam
-          </span>
-          <span class="text-xs text-emerald-100/70">Posted: Sep 15</span>
-        </div>
-        <h3 class="mt-3 text-lg font-bold">Practice Quiz – Web Basics</h3>
-        <p class="mt-2 text-emerald-100/80">Short quiz focusing on tags, attributes, and semantics. Great prep for upcoming checks.</p>
-        <div class="mt-4 flex items-center gap-2">
-          <button class="open-btn inline-flex items-center gap-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 transition text-brand-900 font-semibold px-3.5 py-2">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V8.414A2 2 0 0016.414 7L12 2.586A2 2 0 0010.586 2H5z" clip-rule="evenodd"/></svg>
-            Open notice
-          </button>
-          <button class="read-btn inline-flex items-center gap-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 transition text-emerald-100 px-3.5 py-2 ring-1 ring-emerald-300/30">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            Mark as read
-          </button>
-        </div>
-      </article>
-    </section>
+            // Validate weight
+            if (parseInt(formData.weight) < 110) {
+                alert('Minimum weight requirement is 110 lbs for blood donation.');
+                return;
+            }
 
-    <!-- Empty state -->
-    <div id="empty" class="hidden mt-10 text-center">
-      <div class="inline-flex items-center gap-3 rounded-xl bg-emerald-500/10 px-4 py-3 ring-1 ring-emerald-300/30">
-        <svg class="w-5 h-5 text-emerald-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        <span class="text-emerald-100/80">No notices match this filter.</span>
-      </div>
-    </div>
-  </main>
-
-  <!-- Modal -->
-  <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
-    <div class="absolute inset-0 bg-brand-900/70 backdrop-blur-sm"></div>
-    <div class="relative w-full max-w-2xl glass rounded-2xl p-6 text-emerald-50 ring-1 ring-white/15 shadow-2xl animate-fadeUp">
-      <div class="flex items-start justify-between gap-4">
-        <div>
-          <div id="modalTag" class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold ring-1 ring-emerald-300/30">Notice</div>
-          <h3 id="modalTitle" class="mt-3 text-2xl font-extrabold">Notice Title</h3>
-        </div>
-        <button id="modalClose" class="rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 transition p-2 text-emerald-100" aria-label="Close">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-      </div>
-      <p id="modalDate" class="mt-1 text-sm text-emerald-100/70">Posted: —</p>
-      <p id="modalBody" class="mt-4 text-emerald-100/90 leading-relaxed">
-        —
-      </p>
-
-      <div class="mt-6 flex flex-wrap gap-2">
-        <!-- Demo: since no real files, we show a friendly sample action -->
-        <button id="modalAction" class="inline-flex items-center gap-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 transition text-brand-900 font-semibold px-4 py-2">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V8.414A2 2 0 0016.414 7L12 2.586A2 2 0 0010.586 2H5z" clip-rule="evenodd"/></svg>
-          Open sample
-        </button>
-        <span class="text-xs text-emerald-100/70">This is a demo action (no real files linked).</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 hidden">
-    <div class="glass rounded-xl px-4 py-3 text-emerald-50 ring-1 ring-white/20 shadow-glow flex items-center gap-2">
-      <svg class="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-      <span id="toastText" class="text-sm">Marked as read</span>
-    </div>
-  </div>
-
-  <footer class="relative z-10 border-t border-white/10">
-    <div class="mx-auto max-w-6xl px-6 py-8 text-emerald-100/70 text-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-emerald-300 animate-pulseSoft" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg>
-       BICE 25 Notice Board
-      </div>
-      <div class="text-center sm:text-right">
-        Tip: Use the filters to quickly find what you need.
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Minimal data model for the sample notices
-    const notices = {
-      n1: {
-        id: 'n1',
-        type: 'exam',
-        tag: 'Exam',
-        date: 'Sep 10',
-        title: 'Midterm Review Schedule',
-        body: 'The midterm review runs from Sep 20–24. Topics include HTML structure, basic styling principles, and introductory networking. Please arrive 10 minutes early. Bring your notes and questions for the open Q&A segment.'
-      },
-      n2: {
-        id: 'n2',
-        type: 'assignment',
-        tag: 'Assignment',
-        date: 'Sep 12',
-        title: 'HTML Layout Mini Project',
-        body: 'Build a single-page layout with a header, content, and footer. Keep it responsive and neatly spaced. Submission deadline: Sep 25 at 11:59 PM. You may work in pairs.'
-      },
-      n3: {
-        id: 'n3',
-        type: 'resource',
-        tag: 'Resource',
-        date: 'Sep 14',
-        title: 'Networking Basics – Quick Guide',
-        body: 'A 3-page handout covering IP, DNS, and routing fundamentals. Recommended reading before the quiz. Save it for quick revision during study week.'
-      },
-      n4: {
-        id: 'n4',
-        type: 'exam',
-        tag: 'Exam',
-        date: 'Sep 15',
-        title: 'Practice Quiz – Web Basics',
-        body: 'A short practice quiz on tags, attributes, and semantics. Try it before the weekend. Aim for at least 80% and note areas to revisit.'
-      }
-    };
-
-    // Elements
-    const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
-    const cards = Array.from(document.querySelectorAll('.notice-card'));
-    const emptyState = document.getElementById('empty');
-    const modal = document.getElementById('modal');
-    const modalClose = document.getElementById('modalClose');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalBody = document.getElementById('modalBody');
-    const modalDate = document.getElementById('modalDate');
-    const modalTag = document.getElementById('modalTag');
-    c
+            // Check last donation date (must be at least 56 days ago)
+            if (formData.lastDonation) {
+                const lastDonationDate = new Date(formData.lastDonation);
+                const daysSinceLastDonation = Math.floor((today - lastDonationDate) / (1000 * 60 * 60 * 24));
+                
+                if (daysSinceLastDonation < 56) {
+              
