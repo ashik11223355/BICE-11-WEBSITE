@@ -3,319 +3,1146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Donation Center</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>LifeFlow - Blood Donor Center</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); }
-        .card-shadow { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Enhanced Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 1s ease-out;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #e74c3c, #c0392b, #e74c3c);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .nav-links a:hover {
+            color: #e74c3c;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(10px, 10px); }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            animation: fadeInLeft 1.2s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-60px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            font-weight: 800;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-text .highlight {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(254, 202, 87, 0.8)); }
+        }
+
+        .hero-text p {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 20px 45px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+            animation: bounceIn 1.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(231, 76, 60, 0.5);
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: white;
+            padding: 20px 45px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Blood Drop Visual */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInRight 1.2s ease-out;
+            position: relative;
+        }
+
+        .blood-drop-container {
+            position: relative;
+            width: 300px;
+            height: 400px;
+        }
+
+        .blood-drop {
+            width: 240px;
+            height: 320px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b, #e74c3c);
+            background-size: 200% 200%;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float 4s ease-in-out infinite, gradientShift 3s ease-in-out infinite;
+            box-shadow: 0 25px 50px rgba(231, 76, 60, 0.4);
+        }
+
+        .blood-drop::before {
+            content: '💖';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        .ripple {
+            position: absolute;
+            border: 2px solid rgba(231, 76, 60, 0.3);
+            border-radius: 50%;
+            animation: rippleEffect 3s ease-out infinite;
+        }
+
+        .ripple:nth-child(1) { animation-delay: 0s; }
+        .ripple:nth-child(2) { animation-delay: 1s; }
+        .ripple:nth-child(3) { animation-delay: 2s; }
+
+        @keyframes rippleEffect {
+            0% {
+                width: 240px;
+                height: 240px;
+                opacity: 1;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            100% {
+                width: 400px;
+                height: 400px;
+                opacity: 0;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        /* Enhanced Stats Section */
+        .stats {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 100px 0;
+            margin: 80px 0;
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12, #e74c3c);
+            background-size: 200% 100%;
+            animation: gradientMove 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .stats h2 {
+            text-align: center;
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 60px;
+            font-weight: 800;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .stat-item:hover::before {
+            transform: translateX(0);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #e74c3c;
+            margin-bottom: 15px;
+            animation: countUp 2s ease-out;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .stat-description {
+            font-size: 0.95rem;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        /* Blood Types Section */
+        .blood-types {
+            padding: 100px 0;
+            color: white;
+        }
+
+        .blood-types h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        .blood-types-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-bottom: 60px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .blood-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .blood-type {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .blood-type:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .blood-type-symbol {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+
+        .blood-type-info {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Enhanced Process Section */
+        .process {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            margin: 60px 0;
+        }
+
+        .process h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: white;
+            font-weight: 800;
+        }
+
+        .process-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-bottom: 60px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .step {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 50px 40px;
+            border-radius: 25px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            animation: slideInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .step:hover::before {
+            transform: translateX(0);
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .step-icon {
+            font-size: 4.5rem;
+            margin-bottom: 25px;
+            animation: rotate 6s linear infinite;
+        }
+
+        .step h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .step p {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            margin: 60px 0;
+        }
+
+        .benefits h2 {
+            text-align: center;
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 60px;
+            font-weight: 800;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 30px;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h3 {
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .benefit-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 100px 0;
+            color: white;
+        }
+
+        .faq h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            font-weight: 800;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .faq-answer.active {
+            padding: 0 30px 25px 30px;
+            max-height: 200px;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle.active {
+            transform: rotate(45deg);
+        }
+
+        /* Floating elements */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatHeart 8s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .blood-drop-container {
+                width: 200px;
+                height: 280px;
+            }
+            
+            .blood-drop {
+                width: 160px;
+                height: 220px;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
+<body>
+    <!-- Floating Hearts -->
+    <div class="floating-hearts"></div>
+
     <!-- Header -->
-    <header class="gradient-bg text-white py-6">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                        <span class="text-2xl">🩸</span>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold">LifeShare Blood Center</h1>
-                        <p class="text-red-100 text-sm">Saving lives, one donation at a time</p>
-                    </div>
-                </div>
-                <div class="hidden md:flex items-center space-x-6">
-                    <span class="text-red-100">📞 1-800-DONATE</span>
-                    <span class="text-red-100">🕒 Open 24/7</span>
-                </div>
-            </div>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">🩸 LifeFlow</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#donate">Donate</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <div class="container mx-auto px-4 py-8">
-        <div class="grid lg:grid-cols-3 gap-8">
-            <!-- Main Form -->
-            <div class="lg:col-span-2">
-                <div class="bg-white rounded-xl card-shadow p-8">
-                    <div class="mb-8">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-2">Donor Information Form</h2>
-                        <p class="text-gray-600">Please fill out your information to schedule a blood donation appointment.</p>
-                    </div>
-
-                    <form id="donorForm" class="space-y-6">
-                        <!-- Personal Information -->
-                        <div class="bg-gray-50 rounded-lg p-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                                <span class="mr-2">👤</span> Personal Information
-                            </h3>
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
-                                    <input type="text" id="firstName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
-                                    <input type="text" id="lastName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth *</label>
-                                    <input type="date" id="dob" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Blood Type</label>
-                                    <select id="bloodType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                        <option value="">Select if known</option>
-                                        <option value="A+">A+</option>
-                                        <option value="A-">A-</option>
-                                        <option value="B+">B+</option>
-                                        <option value="B-">B-</option>
-                                        <option value="AB+">AB+</option>
-                                        <option value="AB-">AB-</option>
-                                        <option value="O+">O+</option>
-                                        <option value="O-">O-</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Contact Information -->
-                        <div class="bg-gray-50 rounded-lg p-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                                <span class="mr-2">📞</span> Contact Information
-                            </h3>
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
-                                    <input type="tel" id="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-                                    <input type="email" id="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                </div>
-                                <div class="md:col-span-2">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Address *</label>
-                                    <input type="text" id="address" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">City *</label>
-                                    <input type="text" id="city" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">ZIP Code *</label>
-                                    <input type="text" id="zip" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Health Information -->
-                        <div class="bg-gray-50 rounded-lg p-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                                <span class="mr-2">🏥</span> Health Information
-                            </h3>
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Weight (lbs) *</label>
-                                    <input type="number" id="weight" required min="110" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                    <p class="text-sm text-gray-500 mt-1">Minimum weight requirement: 110 lbs</p>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Last Donation Date</label>
-                                    <input type="date" id="lastDonation" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Any current medications or health conditions?</label>
-                                    <textarea id="healthNotes" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="Please list any medications or health conditions..."></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Preferred Appointment -->
-                        <div class="bg-gray-50 rounded-lg p-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                                <span class="mr-2">📅</span> Preferred Appointment
-                            </h3>
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Date</label>
-                                    <input type="date" id="preferredDate" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Time</label>
-                                    <select id="preferredTime" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                        <option value="">Select time</option>
-                                        <option value="morning">Morning (8AM - 12PM)</option>
-                                        <option value="afternoon">Afternoon (12PM - 5PM)</option>
-                                        <option value="evening">Evening (5PM - 8PM)</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Consent -->
-                        <div class="bg-red-50 border border-red-200 rounded-lg p-6">
-                            <div class="flex items-start space-x-3">
-                                <input type="checkbox" id="consent" required class="mt-1 w-5 h-5 text-red-600 border-gray-300 rounded focus:ring-red-500">
-                                <label for="consent" class="text-sm text-gray-700">
-                                    I consent to donate blood and understand that I will undergo a brief health screening. I confirm that all information provided is accurate to the best of my knowledge. *
-                                </label>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="w-full gradient-bg text-white py-4 px-6 rounded-lg font-semibold text-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200">
-                            Submit Donor Information
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Sidebar Information -->
-            <div class="space-y-6">
-                <!-- Donation Process -->
-                <div class="bg-white rounded-xl card-shadow p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                        <span class="mr-2">ℹ️</span> Donation Process
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-3">
-                            <span class="bg-red-100 text-red-600 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">1</span>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">Registration</h4>
-                                <p class="text-sm text-gray-600">Complete this form and bring a valid ID</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <span class="bg-red-100 text-red-600 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">2</span>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">Health Screening</h4>
-                                <p class="text-sm text-gray-600">Quick health check and questionnaire</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <span class="bg-red-100 text-red-600 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">3</span>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">Donation</h4>
-                                <p class="text-sm text-gray-600">10-15 minutes of actual donation time</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <span class="bg-red-100 text-red-600 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">4</span>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">Recovery</h4>
-                                <p class="text-sm text-gray-600">Rest and refreshments for 10-15 minutes</p>
-                            </div>
-                        </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1><span class="highlight">Save Lives</span><br>Donate Blood</h1>
+                    <p>Every donation can save up to 3 lives. Join our community of heroes and make a difference in someone's life today. Your single act of kindness can bring hope to families and save precious lives.</p>
+                    <div class="hero-buttons">
+                        <button class="cta-button" onclick="scrollToSection('donate')">Donate Now</button>
+                        <button class="secondary-button" onclick="scrollToSection('benefits')">Learn More</button>
                     </div>
                 </div>
-
-                <!-- Eligibility Requirements -->
-                <div class="bg-white rounded-xl card-shadow p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                        <span class="mr-2">✅</span> Eligibility
-                    </h3>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-center space-x-2">
-                            <span class="text-green-500">✓</span>
-                            <span>Age 17+ (16 with parental consent)</span>
-                        </li>
-                        <li class="flex items-center space-x-2">
-                            <span class="text-green-500">✓</span>
-                            <span>Weight at least 110 lbs</span>
-                        </li>
-                        <li class="flex items-center space-x-2">
-                            <span class="text-green-500">✓</span>
-                            <span>Good general health</span>
-                        </li>
-                        <li class="flex items-center space-x-2">
-                            <span class="text-green-500">✓</span>
-                            <span>8 weeks since last whole blood donation</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Impact Stats -->
-                <div class="bg-gradient-to-br from-red-500 to-red-600 text-white rounded-xl p-6">
-                    <h3 class="text-xl font-bold mb-4">Your Impact</h3>
-                    <div class="space-y-3">
-                        <div class="text-center">
-                            <div class="text-3xl font-bold">3</div>
-                            <div class="text-sm text-red-100">Lives saved per donation</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold">56</div>
-                            <div class="text-sm text-red-100">Days between donations</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold">1</div>
-                            <div class="text-sm text-red-100">Pint donated each time</div>
-                        </div>
+                <div class="hero-visual">
+                    <div class="blood-drop-container">
+                        <div class="ripple"></div>
+                        <div class="ripple"></div>
+                        <div class="ripple"></div>
+                        <div class="blood-drop"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Success Modal -->
-    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-xl p-8 max-w-md mx-4 text-center">
-            <div class="text-6xl mb-4">🎉</div>
-            <h3 class="text-2xl font-bold text-gray-800 mb-2">Thank You!</h3>
-            <p class="text-gray-600 mb-6">Your donor information has been submitted successfully. We'll contact you within 24 hours to schedule your appointment.</p>
-            <button onclick="closeModal()" class="gradient-bg text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200">
-                Close
-            </button>
+    <!-- Enhanced Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <h2>Our Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">❤️</div>
+                    <div class="stat-number">4.5M</div>
+                    <div class="stat-label">Lives Saved</div>
+                    <div class="stat-description">Through blood donations since 2010</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🩸</div>
+                    <div class="stat-number">36K</div>
+                    <div class="stat-label">Daily Donations</div>
+                    <div class="stat-description">Collected from generous donors worldwide</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🏥</div>
+                    <div class="stat-number">118</div>
+                    <div class="stat-label">Donation Centers</div>
+                    <div class="stat-description">Across 45 countries globally</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">⏰</div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Emergency Support</div>
+                    <div class="stat-description">Always ready when lives are at stake</div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Blood Types Section -->
+    <section class="blood-types">
+        <div class="container">
+            <h2>Blood Types & Compatibility</h2>
+            <p class="blood-types-subtitle">Understanding blood types helps save more lives through compatible donations</p>
+            <div class="blood-grid">
+                <div class="blood-type">
+                    <div class="blood-type-symbol">O-</div>
+                    <div class="blood-type-info">Universal Donor<br>Can donate to all types</div>
+                </div>
+                <div class="blood-type">
+                    <div class="blood-type-symbol">O+</div>
+                    <div class="blood-type-info">Most Common<br>38% of population</div>
+                </div>
+                <div class="blood-type">
+                    <div class="blood-type-symbol">A-</div>
+                    <div class="blood-type-info">Rare Type<br>6% of population</div>
+                </div>
+                <div class="blood-type">
+                    <div class="blood-type-symbol">A+</div>
+                    <div class="blood-type-info">Common Type<br>34% of population</div>
+                </div>
+                <div class="blood-type">
+                    <div class="blood-type-symbol">B-</div>
+                    <div class="blood-type-info">Rare Type<br>2% of population</div>
+                </div>
+                <div class="blood-type">
+                    <div class="blood-type-symbol">B+</div>
+                    <div class="blood-type-info">Less Common<br>9% of population</div>
+                </div>
+                <div class="blood-type">
+                    <div class="blood-type-symbol">AB-</div>
+                    <div class="blood-type-info">Rarest Type<br>1% of population</div>
+                </div>
+                <div class="blood-type">
+                    <div class="blood-type-symbol">AB+</div>
+                    <div class="blood-type-info">Universal Recipient<br>Can receive from all</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Process Section -->
+    <section class="process" id="donate">
+        <div class="container">
+            <h2>Donation Process</h2>
+            <p class="process-subtitle">Simple, safe, and supervised by medical professionals</p>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📋</div>
+                    <h3>Registration & Health Check</h3>
+                    <p>Complete a confidential health questionnaire and mini-physical including blood pressure, temperature, and hemoglobin check. This ensures your safety and the recipient's safety.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">🩺</div>
+                    <h3>Medical Screening</h3>
+                    <p>Our trained medical staff will review your health history and conduct a brief physical examination to ensure you're eligible and healthy enough to donate.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🩸</div>
+                    <h3>Blood Collection</h3>
+                    <p>The actual donation takes 8-12 minutes. You'll be seated comfortably while approximately one pint of blood is collected using sterile, single-use equipment.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">🍪</div>
+                    <h3>Recovery & Refreshments</h3>
+                    <p>Relax for 10-15 minutes while enjoying complimentary snacks and beverages. Our staff will monitor you to ensure you feel well before leaving.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <h2>Benefits of Blood Donation</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">❤️</div>
+                    <div class="benefit-content">
+                        <h3>Save Lives</h3>
+                        <p>One donation can save up to three lives. You directly impact accident victims, surgery patients, and those with chronic illnesses.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🩺</div>
+                    <div class="benefit-content">
+                        <h3>Free Health Screening</h3>
+                        <p>Receive a mini-physical including blood pressure, pulse, temperature, and hemoglobin level checks at no cost.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔄</div>
+                    <div class="benefit-content">
+                        <h3>Stimulates Blood Production</h3>
+                        <p>Regular donation helps your body maintain healthy iron levels and stimulates the production of new blood cells.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🧠</div>
+                    <div class="benefit-content">
+                        <h3>Mental Health Benefits</h3>
+                        <p>Experience the psychological benefits of helping others, reducing stress, and contributing to your community.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🏆</div>
+                    <div class="benefit-content">
+                        <h3>Recognition & Rewards</h3>
+                        <p>Receive donor recognition, achievement milestones, and exclusive donor appreciation events and gifts.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🌍</div>
+                    <div class="benefit-content">
+                        <h3>Community Impact</h3>
+                        <p>Strengthen your local healthcare system and ensure blood is available for emergencies in your community.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How often can I donate blood?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    You can donate whole blood every 56 days (8 weeks). Platelet donors can donate every 7 days, up to 24 times per year. This allows your body time to replenish the donated blood components.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Is blood donation safe?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, blood donation is completely safe. We use sterile, single-use needles and equipment for each donor. There is no risk of contracting any disease from donating blood.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What are the eligibility requirements?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    You must be at least 17 years old (16 with parental consent in some states), weigh at least 110 pounds, and be in good general health. Additional requirements may apply based on travel history and medications.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How long does the donation process take?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    The entire process takes about 45-60 minutes. The actual blood collection takes only 8-12 minutes. The rest of the time is spent on registration, health screening, and recovery.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What should I do before and after donating?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Before: Eat a healthy meal, drink plenty of water, and get a good night's sleep. After: Continue drinking fluids, avoid heavy lifting for 24 hours, and eat iron-rich foods to help replenish your blood.
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
-        // Set minimum date to today for appointment scheduling
-        document.getElementById('preferredDate').min = new Date().toISOString().split('T')[0];
+        // Smooth scrolling function
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            element.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
 
-        // Form submission handler
-        document.getElementById('donorForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const toggle = element.querySelector('.faq-toggle');
             
-            // Collect form data
-            const formData = {
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                dob: document.getElementById('dob').value,
-                bloodType: document.getElementById('bloodType').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                address: document.getElementById('address').value,
-                city: document.getElementById('city').value,
-                zip: document.getElementById('zip').value,
-                weight: document.getElementById('weight').value,
-                lastDonation: document.getElementById('lastDonation').value,
-                healthNotes: document.getElementById('healthNotes').value,
-                preferredDate: document.getElementById('preferredDate').value,
-                preferredTime: document.getElementById('preferredTime').value,
-                consent: document.getElementById('consent').checked
-            };
+            answer.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
 
-            // Validate age (must be 17+)
-            const birthDate = new Date(formData.dob);
-            const today = new Date();
-            const age = today.getFullYear() - birthDate.getFullYear();
-            const monthDiff = today.getMonth() - birthDate.getMonth();
+        // Create floating hearts
+        function createFloatingHearts() {
+            const heartsContainer = document.querySelector('.floating-hearts');
+            const hearts = ['❤️', '💖', '💝', '💗', '💓'];
             
-            if (age < 17 || (age === 17 && monthDiff < 0)) {
-                alert('You must be at least 17 years old to donate blood.');
-                return;
-            }
-
-            // Validate weight
-            if (parseInt(formData.weight) < 110) {
-                alert('Minimum weight requirement is 110 lbs for blood donation.');
-                return;
-            }
-
-            // Check last donation date (must be at least 56 days ago)
-            if (formData.lastDonation) {
-                const lastDonationDate = new Date(formData.lastDonation);
-                const daysSinceLastDonation = Math.floor((today - lastDonationDate) / (1000 * 60 * 60 * 24));
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = Math.random() * 3 + 5 + 's';
+                heart.style.fontSize = Math.random() * 10 + 15 + 'px';
                 
-                if (daysSinceLastDonation < 56) {
-              
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 8000);
+            }, 2000);
+        }
+
+        // Animate numbers on scroll
+        function animateNumbers() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const finalNumber = target.textContent;
+                        target.textContent = '0';
+                        
+                        const numMatch = finalNumber.match(/[\d.]+/);
+                        if (numMatch) {
+                            const num = parseFloat(numMatch[0]);
+                            const suffix = finalNumber.replace(numMatch[0], '');
+                            
+                            let current = 0;
+                            const increment = num / 60;
+                            const timer = setInterval(() => {
+                                current += increment;
+                                if (current >= num) {
+                                    current = num;
+                                    clearInterval(timer);
+                                }
+                                target.textContent = Math.floor(current) + suffix;
+                            }, 30);
+                        }
+                        
+                        observer.unobserve(target);
+                    }
+                });
+            });
+            
+            statNumbers.forEach(num => observer.observe(num));
+        }
+
+        // Stagger animations
+        function staggerAnimations() {
+            const steps = document.querySelectorAll('.step');
+            const bloodTypes = document.querySelectorAll('.blood-type');
+            const benefits = document.querySelectorAll('.benefit-item');
+            
+            steps.forEach((step, index) => {
+                step.style.animationDelay = `${index * 0.2}s`;
+            });
+            
+            bloodTypes.forEach((type, index) => {
+                type.style.animationDelay = `${index * 0.1}s`;
+            });
+            
+            benefits.forEach((benefit, index) => {
+                benefit.style.animationDelay = `${index * 0.15}s`;
+            });
+        }
+
+        // Parallax effect for hero background
+        function parallaxEffect() {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                const rate = scrolled * -0.5;
+                hero.style.transform = `translateY(${rate}px)`;
+            });
+        }
+
+        // Enhanced scroll effects
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            const scrolled = window.scrollY;
+            
+            if (scrolled > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Initialize all animations
+        document.addEventListener('DOMContentLoaded', () => {
+            createFloatingHearts();
+            animateNumbers();
+            staggerAnimations();
+            parallaxEffect();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9847b23f72abfdfe',t:'MTc1ODc3MzY4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
