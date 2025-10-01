@@ -3,696 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LifeFlow - Blood Donor Center</title>
+    <title>Emerald Dreams</title>
     <style>
         body {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Enhanced Header */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            animation: slideDown 1s ease-out;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 32px;
-            font-weight: 800;
-            background: linear-gradient(45deg, #e74c3c, #c0392b, #e74c3c);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease-in-out infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 10px 0;
-        }
-
-        .nav-links a:hover {
-            color: #e74c3c;
-            transform: translateY(-2px);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Enhanced Hero Section */
-        .hero {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a4d3a 50%, #2d8f5f 100%);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 120px;
-            position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            animation: moveGrid 20s linear infinite;
-        }
-
-        @keyframes moveGrid {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(10px, 10px); }
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-text {
-            animation: fadeInLeft 1.2s ease-out;
-        }
-
-        @keyframes fadeInLeft {
-            from { 
-                opacity: 0;
-                transform: translateX(-60px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .hero-text h1 {
-            font-size: 4rem;
-            color: white;
-            margin-bottom: 24px;
-            line-height: 1.1;
-            font-weight: 800;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero-text .highlight {
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5)); }
-            to { filter: drop-shadow(0 0 20px rgba(254, 202, 87, 0.8)); }
-        }
-
-        .hero-text p {
-            font-size: 1.4rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 40px;
-            line-height: 1.7;
-            font-weight: 400;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .cta-button {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            color: white;
-            padding: 20px 45px;
-            border: none;
-            border-radius: 60px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
-            animation: bounceIn 1.5s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 40px rgba(231, 76, 60, 0.5);
-        }
-
-        .secondary-button {
-            background: transparent;
-            color: white;
-            padding: 20px 45px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 60px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .secondary-button:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: translateY(-2px);
-        }
-
-        /* Enhanced Blood Drop Visual */
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: fadeInRight 1.2s ease-out;
-            position: relative;
-        }
-
-        .blood-drop-container {
-            position: relative;
-            width: 300px;
-            height: 400px;
-        }
-
-        .blood-drop {
-            width: 240px;
-            height: 320px;
-            background: linear-gradient(45deg, #e74c3c, #c0392b, #e74c3c);
-            background-size: 200% 200%;
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: float 4s ease-in-out infinite, gradientShift 3s ease-in-out infinite;
-            box-shadow: 0 25px 50px rgba(231, 76, 60, 0.4);
-        }
-
-        .blood-drop::before {
-            content: '💖';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
-            animation: heartbeat 2s ease-in-out infinite;
-        }
-
-        .ripple {
-            position: absolute;
-            border: 2px solid rgba(231, 76, 60, 0.3);
-            border-radius: 50%;
-            animation: rippleEffect 3s ease-out infinite;
-        }
-
-        .ripple:nth-child(1) { animation-delay: 0s; }
-        .ripple:nth-child(2) { animation-delay: 1s; }
-        .ripple:nth-child(3) { animation-delay: 2s; }
-
-        @keyframes rippleEffect {
-            0% {
-                width: 240px;
-                height: 240px;
-                opacity: 1;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-            100% {
-                width: 400px;
-                height: 400px;
-                opacity: 0;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
-
-        /* Enhanced Stats Section */
-        .stats {
-            background: rgba(255, 255, 255, 0.98);
-            padding: 100px 0;
-            margin: 80px 0;
-            border-radius: 30px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stats::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #e74c3c, #f39c12, #e74c3c);
-            background-size: 200% 100%;
-            animation: gradientMove 3s ease-in-out infinite;
-        }
-
-        @keyframes gradientMove {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .stats h2 {
-            text-align: center;
-            font-size: 3rem;
-            color: #333;
-            margin-bottom: 60px;
-            font-weight: 800;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 40px 30px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
-            animation: fadeInUp 1s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(45deg, #e74c3c, #f39c12);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .stat-item:hover::before {
-            transform: translateX(0);
-        }
-
-        .stat-item:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .stat-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: #e74c3c;
-            margin-bottom: 15px;
-            animation: countUp 2s ease-out;
-        }
-
-        .stat-label {
-            font-size: 1.2rem;
-            color: #666;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .stat-description {
-            font-size: 0.95rem;
-            color: #888;
-            line-height: 1.5;
-        }
-
-        /* Blood Types Section */
-        .blood-types {
-            padding: 100px 0;
-            color: white;
-        }
-
-        .blood-types h2 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 30px;
-            font-weight: 800;
-        }
-
-        .blood-types-subtitle {
-            text-align: center;
-            font-size: 1.3rem;
-            margin-bottom: 60px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .blood-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .blood-type {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            animation: slideInUp 1s ease-out;
-        }
-
-        .blood-type:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .blood-type-symbol {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #ff6b6b;
-            margin-bottom: 15px;
-        }
-
-        .blood-type-info {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        /* Enhanced Process Section */
-        .process {
-            padding: 100px 0;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            margin: 60px 0;
-        }
-
-        .process h2 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 30px;
-            color: white;
-            font-weight: 800;
-        }
-
-        .process-subtitle {
-            text-align: center;
-            font-size: 1.3rem;
-            margin-bottom: 60px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
-
-        .step {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 50px 40px;
-            border-radius: 25px;
-            text-align: center;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s ease;
-            animation: slideInUp 1s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .step::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(45deg, #e74c3c, #f39c12);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .step:hover::before {
-            transform: translateX(0);
-        }
-
-        .step:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .step-number {
-            position: absolute;
-            top: -15px;
-            right: 20px;
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .step-icon {
-            font-size: 4.5rem;
-            margin-bottom: 25px;
-            animation: rotate 6s linear infinite;
-        }
-
-        .step h3 {
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            color: #fff;
-            font-weight: 700;
-        }
-
-        .step p {
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.7;
-            font-size: 1.05rem;
-        }
-
-        /* Benefits Section */
-        .benefits {
-            padding: 100px 0;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 30px;
-            margin: 60px 0;
-        }
-
-        .benefits h2 {
-            text-align: center;
-            font-size: 3rem;
-            color: #333;
-            margin-bottom: 60px;
-            font-weight: 800;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        .benefit-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 30px;
-            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .benefit-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-        }
-
-        .benefit-icon {
-            font-size: 2.5rem;
-            flex-shrink: 0;
-        }
-
-        .benefit-content h3 {
-            font-size: 1.4rem;
-            color: #333;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .benefit-content p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* FAQ Section */
-        .faq {
-            padding: 100px 0;
-            color: white;
-        }
-
-        .faq h2 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 60px;
-            font-weight: 800;
-        }
-
-        .faq-item {
-            background: rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question {
-            padding: 25px 30px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .faq-answer {
-            padding: 0 30px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-        }
-
-        .faq-answer.active {
-            padding: 0 30px 25px 30px;
-            max-height: 200px;
-        }
-
-        .faq-toggle {
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-toggle.active {
-            transform: rotate(45deg);
-        }
-
-        /* Floating elements */
-        .floating-hearts {
+        /* Floating particles animation */
+        .particles {
             position: fixed;
             top: 0;
             left: 0;
@@ -702,447 +26,358 @@
             z-index: 1;
         }
 
-        .floating-heart {
+        .particle {
             position: absolute;
-            font-size: 20px;
-            animation: floatHeart 8s linear infinite;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 1.5s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 2.5s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 3.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            50% { transform: translateY(-10vh) scale(1); opacity: 1; }
+        }
+
+        /* Header with morphing logo */
+        .header {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(45deg, #00ff88, #00cc66, #009944);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: morph 4s infinite ease-in-out;
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.5);
+        }
+
+        @keyframes morph {
+            0%, 100% { border-radius: 50%; transform: rotate(0deg) scale(1); }
+            25% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(90deg) scale(1.1); }
+            50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; transform: rotate(180deg) scale(0.9); }
+            75% { border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%; transform: rotate(270deg) scale(1.05); }
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #000;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ff88, #ffffff, #00cc66);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #cccccc;
+            margin-bottom: 3rem;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Interactive cards */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(26, 77, 58, 0.6) 100%);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #00ff88, #00cc66);
             opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
         }
 
-        @keyframes floatHeart {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: #00ff88;
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.3);
         }
 
-        /* Responsive Design */
+        .card:hover::before {
+            opacity: 0.1;
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 136, 0.4); }
+            50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(0, 255, 136, 0.6); }
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .card-description {
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        /* Animated button */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin: 3rem auto;
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.4);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Wave animation at bottom */
+        .wave-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            z-index: 1;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100px;
+            background: linear-gradient(90deg, #00ff88, #00cc66, #009944, #00ff88);
+            opacity: 0.3;
+            animation: wave 4s linear infinite;
+        }
+
+        .wave:nth-child(2) {
+            animation-delay: -2s;
+            opacity: 0.2;
+            height: 80px;
+        }
+
+        .wave:nth-child(3) {
+            animation-delay: -4s;
+            opacity: 0.1;
+            height: 60px;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(-50%) translateY(0px); }
+            100% { transform: translateX(-50%) translateY(-20px); }
+        }
+
+        /* Responsive design */
         @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 40px;
-            }
-            
-            .hero-text h1 {
-                font-size: 2.8rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .blood-drop-container {
-                width: 200px;
-                height: 280px;
-            }
-            
-            .blood-drop {
-                width: 160px;
-                height: 220px;
-            }
-            
-            .hero-buttons {
-                justify-content: center;
-            }
-            
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
+            .main-title { font-size: 2.5rem; }
+            .subtitle { font-size: 1.2rem; }
+            .cards-container { grid-template-columns: 1fr; padding: 1rem; }
+            .header { padding: 2rem 1rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Floating Hearts -->
-    <div class="floating-hearts"></div>
+    <!-- Floating particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
 
     <!-- Header -->
     <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <div class="logo">🩸 LifeFlow</div>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#donate">Donate</a></li>
-                    <li><a href="#benefits">Benefits</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+        <div class="logo">
+            <div class="logo-text">ED</div>
         </div>
+        <h1 class="main-title">Emerald Dreams</h1>
+        <p class="subtitle">Where Innovation Meets Elegance</p>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1><span class="highlight">Save Lives</span><br>Donate Blood</h1>
-                    <p>Every donation can save up to 3 lives. Join our community of heroes and make a difference in someone's life today. Your single act of kindness can bring hope to families and save precious lives.</p>
-                    <div class="hero-buttons">
-                        <button class="cta-button" onclick="scrollToSection('donate')">Donate Now</button>
-                        <button class="secondary-button" onclick="scrollToSection('benefits')">Learn More</button>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="blood-drop-container">
-                        <div class="ripple"></div>
-                        <div class="ripple"></div>
-                        <div class="ripple"></div>
-                        <div class="blood-drop"></div>
-                    </div>
-                </div>
-            </div>
+    <!-- Cards Section -->
+    <div class="cards-container">
+        <div class="card" onclick="this.style.transform='translateY(-15px) scale(1.08) rotateY(5deg)'">
+            <div class="card-icon">✨</div>
+            <h3 class="card-title">Creative Design</h3>
+            <p class="card-description">Stunning visual experiences that captivate and inspire your audience with every interaction.</p>
         </div>
-    </section>
 
-    <!-- Enhanced Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <h2>Our Impact</h2>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-icon">❤️</div>
-                    <div class="stat-number">4.5M</div>
-                    <div class="stat-label">Lives Saved</div>
-                    <div class="stat-description">Through blood donations since 2010</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">🩸</div>
-                    <div class="stat-number">36K</div>
-                    <div class="stat-label">Daily Donations</div>
-                    <div class="stat-description">Collected from generous donors worldwide</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">🏥</div>
-                    <div class="stat-number">118</div>
-                    <div class="stat-label">Donation Centers</div>
-                    <div class="stat-description">Across 45 countries globally</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">⏰</div>
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">Emergency Support</div>
-                    <div class="stat-description">Always ready when lives are at stake</div>
-                </div>
-            </div>
+        <div class="card" onclick="this.style.transform='translateY(-15px) scale(1.08) rotateY(-5deg)'">
+            <div class="card-icon">🚀</div>
+            <h3 class="card-title">Performance</h3>
+            <p class="card-description">Lightning-fast animations and smooth transitions that deliver exceptional user experiences.</p>
         </div>
-    </section>
 
-    <!-- Blood Types Section -->
-    <section class="blood-types">
-        <div class="container">
-            <h2>Blood Types & Compatibility</h2>
-            <p class="blood-types-subtitle">Understanding blood types helps save more lives through compatible donations</p>
-            <div class="blood-grid">
-                <div class="blood-type">
-                    <div class="blood-type-symbol">O-</div>
-                    <div class="blood-type-info">Universal Donor<br>Can donate to all types</div>
-                </div>
-                <div class="blood-type">
-                    <div class="blood-type-symbol">O+</div>
-                    <div class="blood-type-info">Most Common<br>38% of population</div>
-                </div>
-                <div class="blood-type">
-                    <div class="blood-type-symbol">A-</div>
-                    <div class="blood-type-info">Rare Type<br>6% of population</div>
-                </div>
-                <div class="blood-type">
-                    <div class="blood-type-symbol">A+</div>
-                    <div class="blood-type-info">Common Type<br>34% of population</div>
-                </div>
-                <div class="blood-type">
-                    <div class="blood-type-symbol">B-</div>
-                    <div class="blood-type-info">Rare Type<br>2% of population</div>
-                </div>
-                <div class="blood-type">
-                    <div class="blood-type-symbol">B+</div>
-                    <div class="blood-type-info">Less Common<br>9% of population</div>
-                </div>
-                <div class="blood-type">
-                    <div class="blood-type-symbol">AB-</div>
-                    <div class="blood-type-info">Rarest Type<br>1% of population</div>
-                </div>
-                <div class="blood-type">
-                    <div class="blood-type-symbol">AB+</div>
-                    <div class="blood-type-info">Universal Recipient<br>Can receive from all</div>
-                </div>
-            </div>
+        <div class="card" onclick="this.style.transform='translateY(-15px) scale(1.08) rotateZ(2deg)'">
+            <div class="card-icon">💎</div>
+            <h3 class="card-title">Premium Quality</h3>
+            <p class="card-description">Meticulously crafted details and premium aesthetics that set your brand apart from the rest.</p>
         </div>
-    </section>
+    </div>
 
-    <!-- Enhanced Process Section -->
-    <section class="process" id="donate">
-        <div class="container">
-            <h2>Donation Process</h2>
-            <p class="process-subtitle">Simple, safe, and supervised by medical professionals</p>
-            <div class="process-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-icon">📋</div>
-                    <h3>Registration & Health Check</h3>
-                    <p>Complete a confidential health questionnaire and mini-physical including blood pressure, temperature, and hemoglobin check. This ensures your safety and the recipient's safety.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-icon">🩺</div>
-                    <h3>Medical Screening</h3>
-                    <p>Our trained medical staff will review your health history and conduct a brief physical examination to ensure you're eligible and healthy enough to donate.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-icon">🩸</div>
-                    <h3>Blood Collection</h3>
-                    <p>The actual donation takes 8-12 minutes. You'll be seated comfortably while approximately one pint of blood is collected using sterile, single-use equipment.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-icon">🍪</div>
-                    <h3>Recovery & Refreshments</h3>
-                    <p>Relax for 10-15 minutes while enjoying complimentary snacks and beverages. Our staff will monitor you to ensure you feel well before leaving.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Call to Action -->
+    <div style="text-align: center; padding: 2rem;">
+        <a href="#" class="cta-button" onclick="event.preventDefault(); this.innerHTML='✓ Amazing!'; this.style.background='linear-gradient(45deg, #00ff88, #ffffff)'; setTimeout(() => { this.innerHTML='Get Started'; this.style.background='linear-gradient(45deg, #00ff88, #00cc66)'; }, 2000);">Get Started</a>
+    </div>
 
-    <!-- Benefits Section -->
-    <section class="benefits" id="benefits">
-        <div class="container">
-            <h2>Benefits of Blood Donation</h2>
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <div class="benefit-icon">❤️</div>
-                    <div class="benefit-content">
-                        <h3>Save Lives</h3>
-                        <p>One donation can save up to three lives. You directly impact accident victims, surgery patients, and those with chronic illnesses.</p>
-                    </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">🩺</div>
-                    <div class="benefit-content">
-                        <h3>Free Health Screening</h3>
-                        <p>Receive a mini-physical including blood pressure, pulse, temperature, and hemoglobin level checks at no cost.</p>
-                    </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">🔄</div>
-                    <div class="benefit-content">
-                        <h3>Stimulates Blood Production</h3>
-                        <p>Regular donation helps your body maintain healthy iron levels and stimulates the production of new blood cells.</p>
-                    </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">🧠</div>
-                    <div class="benefit-content">
-                        <h3>Mental Health Benefits</h3>
-                        <p>Experience the psychological benefits of helping others, reducing stress, and contributing to your community.</p>
-                    </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">🏆</div>
-                    <div class="benefit-content">
-                        <h3>Recognition & Rewards</h3>
-                        <p>Receive donor recognition, achievement milestones, and exclusive donor appreciation events and gifts.</p>
-                    </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">🌍</div>
-                    <div class="benefit-content">
-                        <h3>Community Impact</h3>
-                        <p>Strengthen your local healthcare system and ensure blood is available for emergencies in your community.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq" id="faq">
-        <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>How often can I donate blood?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    You can donate whole blood every 56 days (8 weeks). Platelet donors can donate every 7 days, up to 24 times per year. This allows your body time to replenish the donated blood components.
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Is blood donation safe?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    Yes, blood donation is completely safe. We use sterile, single-use needles and equipment for each donor. There is no risk of contracting any disease from donating blood.
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>What are the eligibility requirements?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    You must be at least 17 years old (16 with parental consent in some states), weigh at least 110 pounds, and be in good general health. Additional requirements may apply based on travel history and medications.
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>How long does the donation process take?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    The entire process takes about 45-60 minutes. The actual blood collection takes only 8-12 minutes. The rest of the time is spent on registration, health screening, and recovery.
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>What should I do before and after donating?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    Before: Eat a healthy meal, drink plenty of water, and get a good night's sleep. After: Continue drinking fluids, avoid heavy lifting for 24 hours, and eat iron-rich foods to help replenish your blood.
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Animated waves -->
+    <div class="wave-container">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
 
     <script>
-        // Smooth scrolling function
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            element.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        // FAQ Toggle
-        function toggleFAQ(element) {
-            const answer = element.nextElementSibling;
-            const toggle = element.querySelector('.faq-toggle');
-            
-            answer.classList.toggle('active');
-            toggle.classList.toggle('active');
-        }
-
-        // Create floating hearts
-        function createFloatingHearts() {
-            const heartsContainer = document.querySelector('.floating-hearts');
-            const hearts = ['❤️', '💖', '💝', '💗', '💓'];
-            
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.className = 'floating-heart';
-                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDuration = Math.random() * 3 + 5 + 's';
-                heart.style.fontSize = Math.random() * 10 + 15 + 'px';
+        // Add interactive sparkle effect on mouse move
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() > 0.9) {
+                const sparkle = document.createElement('div');
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.width = '6px';
+                sparkle.style.height = '6px';
+                sparkle.style.background = 'linear-gradient(45deg, #00ff88, #ffffff)';
+                sparkle.style.borderRadius = '50%';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.zIndex = '1000';
+                sparkle.style.animation = 'sparkle 1s ease-out forwards';
                 
-                heartsContainer.appendChild(heart);
+                document.body.appendChild(sparkle);
                 
                 setTimeout(() => {
-                    heart.remove();
-                }, 8000);
-            }, 2000);
-        }
-
-        // Animate numbers on scroll
-        function animateNumbers() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const target = entry.target;
-                        const finalNumber = target.textContent;
-                        target.textContent = '0';
-                        
-                        const numMatch = finalNumber.match(/[\d.]+/);
-                        if (numMatch) {
-                            const num = parseFloat(numMatch[0]);
-                            const suffix = finalNumber.replace(numMatch[0], '');
-                            
-                            let current = 0;
-                            const increment = num / 60;
-                            const timer = setInterval(() => {
-                                current += increment;
-                                if (current >= num) {
-                                    current = num;
-                                    clearInterval(timer);
-                                }
-                                target.textContent = Math.floor(current) + suffix;
-                            }, 30);
-                        }
-                        
-                        observer.unobserve(target);
-                    }
-                });
-            });
-            
-            statNumbers.forEach(num => observer.observe(num));
-        }
-
-        // Stagger animations
-        function staggerAnimations() {
-            const steps = document.querySelectorAll('.step');
-            const bloodTypes = document.querySelectorAll('.blood-type');
-            const benefits = document.querySelectorAll('.benefit-item');
-            
-            steps.forEach((step, index) => {
-                step.style.animationDelay = `${index * 0.2}s`;
-            });
-            
-            bloodTypes.forEach((type, index) => {
-                type.style.animationDelay = `${index * 0.1}s`;
-            });
-            
-            benefits.forEach((benefit, index) => {
-                benefit.style.animationDelay = `${index * 0.15}s`;
-            });
-        }
-
-        // Parallax effect for hero background
-        function parallaxEffect() {
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const hero = document.querySelector('.hero');
-                const rate = scrolled * -0.5;
-                hero.style.transform = `translateY(${rate}px)`;
-            });
-        }
-
-        // Enhanced scroll effects
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            const scrolled = window.scrollY;
-            
-            if (scrolled > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.15)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
+                    sparkle.remove();
+                }, 1000);
             }
         });
 
-        // Initialize all animations
-        document.addEventListener('DOMContentLoaded', () => {
-            createFloatingHearts();
-            animateNumbers();
-            staggerAnimations();
-            parallaxEffect();
+        // Add sparkle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkle {
+                0% { transform: scale(0) rotate(0deg); opacity: 1; }
+                50% { transform: scale(1) rotate(180deg); opacity: 1; }
+                100% { transform: scale(0) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Reset card transforms when mouse leaves
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseleave', function() {
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9847b23f72abfdfe',t:'MTc1ODc3MzY4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'987b0965038e7e63',t:'MTc1OTMxMjAyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
