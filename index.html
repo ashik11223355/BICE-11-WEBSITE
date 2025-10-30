@@ -1,383 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emerald Dreams</title>
-    <style>
-        body {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #000000 0%, #1a4d3a 50%, #2d8f5f 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Love You Heart</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: "Poppins", sans-serif;
+    }
 
-        /* Floating particles animation */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
+    .scene {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      transform-style: preserve-3d;
+      animation: rotate 12s linear infinite;
+    }
 
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: linear-gradient(45deg, #00ff88, #00cc66);
-            border-radius: 50%;
-            animation: float 6s infinite ease-in-out;
-        }
+    @keyframes rotate {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
 
-        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
-        .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
-        .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
-        .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
-        .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
-        .particle:nth-child(7) { left: 70%; animation-delay: 1.5s; }
-        .particle:nth-child(8) { left: 80%; animation-delay: 2.5s; }
-        .particle:nth-child(9) { left: 90%; animation-delay: 3.5s; }
+    .word {
+      position: absolute;
+      color: red;
+      font-size: 1.1rem;
+      font-weight: bold;
+      white-space: nowrap;
+      text-shadow: 0 0 10px red, 0 0 20px red;
+    }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            50% { transform: translateY(-10vh) scale(1); opacity: 1; }
-        }
-
-        /* Header with morphing logo */
-        .header {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 4rem 2rem;
-        }
-
-        .logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 2rem;
-            background: linear-gradient(45deg, #00ff88, #00cc66, #009944);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: morph 4s infinite ease-in-out;
-            box-shadow: 0 0 40px rgba(0, 255, 136, 0.5);
-        }
-
-        @keyframes morph {
-            0%, 100% { border-radius: 50%; transform: rotate(0deg) scale(1); }
-            25% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(90deg) scale(1.1); }
-            50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; transform: rotate(180deg) scale(0.9); }
-            75% { border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%; transform: rotate(270deg) scale(1.05); }
-        }
-
-        .logo-text {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #000;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .main-title {
-            font-size: 4rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #00ff88, #ffffff, #00cc66);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 3s ease-in-out infinite;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            color: #cccccc;
-            margin-bottom: 3rem;
-            animation: fadeInUp 2s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Interactive cards */
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-
-        .card {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(26, 77, 58, 0.6) 100%);
-            border: 2px solid transparent;
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, #00ff88, #00cc66);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: -1;
-        }
-
-        .card:hover {
-            transform: translateY(-10px) scale(1.05);
-            border-color: #00ff88;
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.3);
-        }
-
-        .card:hover::before {
-            opacity: 0.1;
-        }
-
-        .card-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(45deg, #00ff88, #00cc66);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 136, 0.4); }
-            50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(0, 255, 136, 0.6); }
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 1rem;
-        }
-
-        .card-description {
-            color: #cccccc;
-            line-height: 1.6;
-        }
-
-        /* Animated button */
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            margin: 3rem auto;
-            background: linear-gradient(45deg, #00ff88, #00cc66);
-            color: #000;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 10;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.4);
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        /* Wave animation at bottom */
-        .wave-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 200px;
-            z-index: 1;
-        }
-
-        .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 200%;
-            height: 100px;
-            background: linear-gradient(90deg, #00ff88, #00cc66, #009944, #00ff88);
-            opacity: 0.3;
-            animation: wave 4s linear infinite;
-        }
-
-        .wave:nth-child(2) {
-            animation-delay: -2s;
-            opacity: 0.2;
-            height: 80px;
-        }
-
-        .wave:nth-child(3) {
-            animation-delay: -4s;
-            opacity: 0.1;
-            height: 60px;
-        }
-
-        @keyframes wave {
-            0% { transform: translateX(-50%) translateY(0px); }
-            100% { transform: translateX(-50%) translateY(-20px); }
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .main-title { font-size: 2.5rem; }
-            .subtitle { font-size: 1.2rem; }
-            .cards-container { grid-template-columns: 1fr; padding: 1rem; }
-            .header { padding: 2rem 1rem; }
-        }
-    </style>
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      font-weight: bold;
+      color: red;
+      text-shadow: 0 0 20px red, 0 0 40px red;
+      z-index: 10;
+    }
+  </style>
 </head>
 <body>
-    <!-- Floating particles -->
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
+  <div class="scene" id="heart"></div>
+  <div class="center">LOVE ❤️</div>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">
-            <div class="logo-text">ED</div>
-        </div>
-        <h1 class="main-title">Emerald Dreams</h1>
-        <p class="subtitle">Where Innovation Meets Elegance</p>
-    </header>
+  <script>
+    const heart = document.getElementById("heart");
+    const text = "I love you ";
+    const n = 100; // Number of lines
 
-    <!-- Cards Section -->
-    <div class="cards-container">
-        <div class="card" onclick="this.style.transform='translateY(-15px) scale(1.08) rotateY(5deg)'">
-            <div class="card-icon">✨</div>
-            <h3 class="card-title">Creative Design</h3>
-            <p class="card-description">Stunning visual experiences that captivate and inspire your audience with every interaction.</p>
-        </div>
+    for (let i = 0; i < n; i++) {
+      const angle = (i / n) * Math.PI * 2;
+      const x = 16 * Math.pow(Math.sin(angle), 3);
+      const y = 13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle);
 
-        <div class="card" onclick="this.style.transform='translateY(-15px) scale(1.08) rotateY(-5deg)'">
-            <div class="card-icon">🚀</div>
-            <h3 class="card-title">Performance</h3>
-            <p class="card-description">Lightning-fast animations and smooth transitions that deliver exceptional user experiences.</p>
-        </div>
-
-        <div class="card" onclick="this.style.transform='translateY(-15px) scale(1.08) rotateZ(2deg)'">
-            <div class="card-icon">💎</div>
-            <h3 class="card-title">Premium Quality</h3>
-            <p class="card-description">Meticulously crafted details and premium aesthetics that set your brand apart from the rest.</p>
-        </div>
-    </div>
-
-    <!-- Call to Action -->
-    <div style="text-align: center; padding: 2rem;">
-        <a href="#" class="cta-button" onclick="event.preventDefault(); this.innerHTML='✓ Amazing!'; this.style.background='linear-gradient(45deg, #00ff88, #ffffff)'; setTimeout(() => { this.innerHTML='Get Started'; this.style.background='linear-gradient(45deg, #00ff88, #00cc66)'; }, 2000);">Get Started</a>
-    </div>
-
-    <!-- Animated waves -->
-    <div class="wave-container">
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-    </div>
-
-    <script>
-        // Add interactive sparkle effect on mouse move
-        document.addEventListener('mousemove', function(e) {
-            if (Math.random() > 0.9) {
-                const sparkle = document.createElement('div');
-                sparkle.style.position = 'fixed';
-                sparkle.style.left = e.clientX + 'px';
-                sparkle.style.top = e.clientY + 'px';
-                sparkle.style.width = '6px';
-                sparkle.style.height = '6px';
-                sparkle.style.background = 'linear-gradient(45deg, #00ff88, #ffffff)';
-                sparkle.style.borderRadius = '50%';
-                sparkle.style.pointerEvents = 'none';
-                sparkle.style.zIndex = '1000';
-                sparkle.style.animation = 'sparkle 1s ease-out forwards';
-                
-                document.body.appendChild(sparkle);
-                
-                setTimeout(() => {
-                    sparkle.remove();
-                }, 1000);
-            }
-        });
-
-        // Add sparkle animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes sparkle {
-                0% { transform: scale(0) rotate(0deg); opacity: 1; }
-                50% { transform: scale(1) rotate(180deg); opacity: 1; }
-                100% { transform: scale(0) rotate(360deg); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Reset card transforms when mouse leaves
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mouseleave', function() {
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
-            });
-        });
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'987b0965038e7e63',t:'MTc1OTMxMjAyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+      const word = document.createElement("div");
+      word.className = "word";
+      word.innerText = text.repeat(2);
+      word.style.transform = `
+        translate3d(${x * 10}px, ${-y * 10}px, ${i}px)
+        rotateY(${angle}rad)
+      `;
+      heart.appendChild(word);
+    }
+  </script>
+</body>
 </html>
